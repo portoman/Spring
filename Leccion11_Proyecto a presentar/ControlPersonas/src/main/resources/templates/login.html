@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns="http://www.w3.org/1999/xhtml">
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head th:replace="layout/plantilla :: head">
         <title>Login</title>
     </head>
@@ -23,7 +24,7 @@
                     <div class="col-md-6 mx-auto">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Registro</h4>
+                                <h4>[[#{login.registro}]]</h4>
                             </div>
                             <div class="card-body">
                                 <form method="POST" th:action="@{/login}">
