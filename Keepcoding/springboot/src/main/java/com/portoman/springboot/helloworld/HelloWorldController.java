@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.portoman.springboot.helloworld.BeanResponse;
+import java.util.Locale;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 //1. Anotar la clase como un controlador
 //2. Crear métodos que respondan a los endpoints
@@ -16,12 +20,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RestController
 public class HelloWorldController {
     
-    // /hello-world
+    
+     @Autowired
+    private MessageSource messageSource;
+     
+     
     //GET
     //@RequestMapping(value="/hello-world", method= RequestMethod.GET)
     @GetMapping(value="/hello-world")
-    public @ResponseBody String helloWorld(){
-        return "Hello World!";
+    public String helloWorld(@RequestHeader(name="Accept-Language", required=false)Locale locale){
+        return messageSource.getMessage("hello.world.message", null ,locale);
     }
     
     @GetMapping(value="/hello-world-bean")
@@ -33,4 +41,6 @@ public class HelloWorldController {
     public String helloWorldVariable(@PathVariable String name){
         return "Hello " + name +" !";
     }
+    
+   
 }
